@@ -1,11 +1,14 @@
 const quizData = [ 
     {
     question: 'How old was Ramana Maharshi at the time of his death?',
+    choices: ['40', '56', '79', '70'],
+    correctChoice: 3,
     a: '40',
     b: '56',
     c: '79',
     d: '70', 
-    correct: 'd'
+    correct: 'd',
+    
 }, {
     question: 'What is the most used programming language in 2022?',
     a: 'Java',
@@ -14,14 +17,14 @@ const quizData = [
     d: 'Javascript',
     correct: 'd'
 }, {
-    question: 'Who is the current president of the USA?'
+    question: 'Who is the current president of the USA?',
     a: 'Joe Biden',
     b: 'Mitt Romney',
     c: 'Elon Musk',
     d: 'Donald Trump',
     correct: 'a'
 }, {
-    question: 'What instrument does Ana Federova play?'
+    question: 'What instrument does Ana Federova play?',
     a: 'Guitar',
     b: 'Piano',
     c: 'Violin',
