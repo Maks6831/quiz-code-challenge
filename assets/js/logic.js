@@ -6,7 +6,10 @@ let currentQuest = 0;
 let answerIndex = quizData[currentQuest].correctChoice;
 
 function quiz(){
-    panel.classList.remove("hide")
+    if (currentQuest === 5) {
+        panel.classList.add("hide");
+    } else {
+        panel.classList.remove("hide")
     question.textContent = quizData[currentQuest].question;
     console.log(currentQuest);
     const list = document.createElement("ul");
@@ -25,12 +28,17 @@ function quiz(){
                 console.log('False')
             }
         })
+        
     }
     choiceBox.appendChild(list)
     
     console.log(choiceBox)
     
 }
+        
+
+    }
+    
 
 
 
