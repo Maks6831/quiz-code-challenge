@@ -13,7 +13,7 @@ let score = 0;
 
 function finale() {
     endScreen.classList.remove("hide");
-    finalScore.textContent = score;
+    finalScore.innerHTML = score;
 }
 
 
@@ -25,8 +25,10 @@ function quiz(){
     if (currentQuest === 5) {
         panel.classList.add("hide");
         start.classList.remove("hide");
+        endScreen.classList.remove("hide");
         start.textContent = "Retake Quiz";
         currentQuest = 0;
+        finale();
     } else {
         start.classList.add("hide");
         panel.classList.remove("hide");
