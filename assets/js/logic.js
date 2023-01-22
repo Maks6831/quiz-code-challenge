@@ -10,7 +10,9 @@ let time = startMinutes * 60;
 let currentQuest = 0;
 let answerIndex = quizData[currentQuest].correctChoice;
 let score = 0; 
-
+let clock = null;
+timer.innerHTML = "2: 00"
+console.log(time);
 
 
 function finale() {
@@ -21,29 +23,40 @@ function finale() {
 
 function endgame(){
     panel.classList.add("hide");
-    start.classList.remove("hide");
     endScreen.classList.remove("hide");
-    start.textContent = "Retake Quiz";
     currentQuest = 0;
     finale();
 }
 
-function countDown () {
-    const minutes = Math.floor(time / 60);
-    let seconds = time % 60;
-    seconds = seconds < 10 ? "0" + seconds: seconds;
-    timer.innerHTML = `${minutes}: ${seconds}`;
-    time--;
-    if(time < 1){
-        endgame()
-        return clearInterval(countDown);
-    }
+function clear() {
+    clearInterval(clock);
+    endgame();
+    timer.innerHTML = "Finished!"
 }
+
+function countDown () {
+    console.log(time);
+    clock = setInterval(function(){
+        const minutes = Math.floor(time / 60);
+        let seconds = time % 60;
+        if (time > 0){
+            seconds = seconds < 10 ? "0" + seconds: seconds;
+            timer.innerHTML = `${minutes}: ${seconds}`;
+            time--;
+        } else {
+            clear();    
+    } 
+    }, 1000)
+    }
+
+
+
+
 
 
 function quiz(){
     if (currentQuest === 5) {
-        endgame();
+        clear();
     } else {
         start.classList.add("hide");
         panel.classList.remove("hide");
@@ -60,7 +73,7 @@ function quiz(){
         button.addEventListener("click", function(){
             if(button.textContent == quizData[currentQuest].choices[quizData[currentQuest].correctChoice]) {
                 console.log('True');
-                choiceBox.removeChild(list)
+                choiceBox.removeChild(buttonDiv);
                 currentQuest++
                 score += 1;
                 quiz();
@@ -92,8 +105,7 @@ function quiz(){
 }       
 } 
 start.addEventListener("click", function(){
+    countDown();
     quiz();
-    setInterval(countDown, 1000);
+    
 })
-
-
