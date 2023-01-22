@@ -1,12 +1,12 @@
 const quizData = [ 
     {
-    question: 'How old was Ramana Maharshi at the time of his death?',
+    question: 'How old was Winston Churchill at the time of his death?',
     choices: ['40', '56', '79', '70'],
     correctChoice: 3,
     a: '40',
     b: '56',
     c: '79',
-    d: '70', 
+    d: '90', 
     correct: 'd',
     
 }, {

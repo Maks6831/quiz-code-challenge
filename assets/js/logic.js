@@ -8,8 +8,12 @@ let answerIndex = quizData[currentQuest].correctChoice;
 function quiz(){
     if (currentQuest === 5) {
         panel.classList.add("hide");
+        start.classList.remove("hide");
+        start.textContent = "Retake Quiz";
+        currentQuest = 0;
     } else {
-        panel.classList.remove("hide")
+        start.classList.add("hide");
+        panel.classList.remove("hide");
     question.textContent = quizData[currentQuest].question;
     console.log(currentQuest);
     const list = document.createElement("ul");
@@ -27,22 +31,12 @@ function quiz(){
             } else {
                 console.log('False')
             }
-        })
-        
+        }) 
     }
     choiceBox.appendChild(list)
-    
-    console.log(choiceBox)
-    
-}
-        
-
-    }
-    
-
-
-
-
+    console.log(choiceBox)    
+}       
+} 
 start.addEventListener("click", quiz)
 
 
