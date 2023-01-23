@@ -5,6 +5,8 @@ let choiceBox = document.querySelector("#choices");
 let endScreen = document.querySelector("#end-screen");
 let finalScore = document.querySelector("#final-score");
 const timer = document.querySelector("#time");
+let initInput = document.querySelector("#initials");
+let submit = document.querySelector("#submit");
 const startMinutes = 2;
 let time = startMinutes * 60; 
 let currentQuest = 0;
@@ -12,7 +14,25 @@ let answerIndex = quizData[currentQuest].correctChoice;
 let score = 0; 
 let clock = null;
 timer.innerHTML = "2: 00"
-console.log(time);
+
+submit.addEventListener("click", function(event){
+    event.preventDefault();
+    let user = {
+        initials: initInput.value.trim(),
+        storedScore: finalScore.textContent,
+    }
+    
+
+    if(initials === ""){
+        alert("Error!");
+        alert("Initials cannot be blank");
+    } else {
+        localStorage.setItem("user", JSON.stringify(user))
+    }
+
+})
+
+
 
 
 function finale() {
@@ -50,6 +70,17 @@ function countDown () {
     }
 
 
+function playCorrect() {
+    let audio = new Audio("./assets/sfx/correct.wav");
+    audio.play();
+}
+
+function playIncorrect() {
+    let audio = new Audio("./assets/sfx/incorrect.wav");
+    audio.play();
+    audio.volume = 0.5;
+}
+
 
 
 
@@ -72,10 +103,11 @@ function quiz(){
         buttonDiv.appendChild(button);
         button.addEventListener("click", function(){
             if(button.textContent == quizData[currentQuest].choices[quizData[currentQuest].correctChoice]) {
+                playCorrect();
                 console.log('True');
                 choiceBox.removeChild(buttonDiv);
                 currentQuest++
-                score += 1;
+                score++;
                 quiz();
                 const right = document.createElement("h4");
                 right.textContent = "Correct!";
@@ -85,6 +117,7 @@ function quiz(){
                     right.classList.add("hide");
                 }, 600);
              } else {
+                playIncorrect();
                 console.log('False')
                 time = time - 40;
                 currentQuest++;
