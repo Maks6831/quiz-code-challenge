@@ -17,17 +17,22 @@ timer.innerHTML = "2: 00"
 
 submit.addEventListener("click", function(event){
     event.preventDefault();
-    let user = {
-        initials: initInput.value.trim(),
-        storedScore: finalScore.textContent,
-    }
+    let initials = initInput.value.trim();
+    
     
 
     if(initials === ""){
         alert("Error!");
         alert("Initials cannot be blank");
     } else {
-        localStorage.setItem("user", JSON.stringify(user))
+        let user = {
+            initials: initials,
+            storedScore: finalScore.textContent,
+        }
+        let highScores = JSON.parse(localStorage.getItem("high-scores"))||[];
+        highScores.push(user);
+        localStorage.setItem("high-scores", JSON.stringify(highScores));
+        window.location.href = "highscores.html";
     }
 
 })
@@ -82,8 +87,40 @@ function playIncorrect() {
 }
 
 
+function handleChoice(event) {
+    let button = event.target;
+    if(button.textContent == quizData[currentQuest].choices[quizData[currentQuest].correctChoice]) {
+        playCorrect();
+        console.log('True');
+       
+        currentQuest++
+        score++;
+        quiz();
+        const right = document.createElement("h4");
+        right.textContent = "Correct!";
+        choiceBox.appendChild(right);
+        right.classList.add("appear");
+        setTimeout(function() {
+            right.classList.add("hide");
+        }, 600);
+     } else {
+        playIncorrect();
+        console.log('False')
+        time = time - 40;
+        currentQuest++;
 
+        quiz();
+        const wrong = document.createElement("h4"); 
+        wrong.textContent = "Wrong!! 30 seconds deducted..."
+        choiceBox.appendChild(wrong);
+        wrong.classList.add("appear");
+        setTimeout(function() {
+            wrong.classList.add("hide");
+        }, 600);
+    
+ }
 
+}
 
 function quiz(){
     if (currentQuest === 5) {
@@ -94,44 +131,14 @@ function quiz(){
     question.textContent = quizData[currentQuest].question;
     console.log(currentQuest);
     const buttonDiv = document.createElement("div");
+    choiceBox.innerHTML = "";
     for (let i = 0; i < 4; i++){
-        
         const button = document.createElement("button");
         button.className = "button" + [i]
         button.innerHTML = quizData[currentQuest].choices[i];
         console.log(button)
         buttonDiv.appendChild(button);
-        button.addEventListener("click", function(){
-            if(button.textContent == quizData[currentQuest].choices[quizData[currentQuest].correctChoice]) {
-                playCorrect();
-                console.log('True');
-                choiceBox.removeChild(buttonDiv);
-                currentQuest++
-                score++;
-                quiz();
-                const right = document.createElement("h4");
-                right.textContent = "Correct!";
-                choiceBox.appendChild(right);
-                right.classList.add("appear");
-                setTimeout(function() {
-                    right.classList.add("hide");
-                }, 600);
-             } else {
-                playIncorrect();
-                console.log('False')
-                time = time - 40;
-                currentQuest++;
-                choiceBox.removeChild(buttonDiv);
-                quiz();
-                const wrong = document.createElement("h4"); 
-                wrong.textContent = "Wrong!! 30 seconds deducted..."
-                choiceBox.appendChild(wrong);
-                wrong.classList.add("appear");
-                setTimeout(function() {
-                    wrong.classList.add("hide");
-                }, 600);
-            
-         }}) 
+        button.addEventListener("click", handleChoice); 
     }
     choiceBox.appendChild(buttonDiv);
     console.log(choiceBox)    
