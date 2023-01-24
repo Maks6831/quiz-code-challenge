@@ -8,3 +8,10 @@ for(let i = 0; i < hs.length; i++){
 
     ol.appendChild(li);
 }
+
+let clearScores = document.getElementById("clear");
+
+clearScores.addEventListener("click", function(){
+    localStorage.removeItem("high-scores");
+    location.reload();
+})
