@@ -194,8 +194,6 @@ function quiz(){
 
 //---------------------------------------------------------- quiz start!!-----------------------------------------------------------//
 
-
-
 start.addEventListener("click", function(){
     // commences countdown.
     countDown();
