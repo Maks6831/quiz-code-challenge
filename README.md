@@ -7,7 +7,8 @@ Project to create a quiz using Javascript APIs
 The purpose of this project was to create a fully working quiz app which stores and displays scores. The main aim was to add javascript to provide functionality to the app. The questions were stored as an array of objects in the questions.js file. The main functionality of the index.html page is stored in the logic.js file. The functionality of the highscore.html page is stored in the scores.js file. Contained in the js files are a plethora of different web API's, methods, functions loops etc. designed to make the app as pragmatic and accessible as possible. The project also utilizes local storage to store user information and scores which are displayed on the highscore page. Please find the the screenshot and linked to the deployed webpage below.
 
 ### Screenshot
-![Screenshot 2023-01-24 at 19 43 59](https://user-images.githubusercontent.com/118021969/214393225-a0553b6d-efa3-4722-a89c-657a18cdf36b.jpg)
+![Screenshot 2023-01-24 at 19 49 50](https://user-images.githubusercontent.com/118021969/214394247-e03fddc1-16a7-4c32-8bc8-1f2c00edcc97.png)
+
 
 
 
